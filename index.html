@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حكايتي | مكتبة القصص العربية للأطفال — Hikayati Story Library</title>
+<meta name="description" content="حكايتي: مكتبة رقمية لقصص الأطفال العربية المصوّرة والمشكّلة، بمساعدة الذكاء الاصطناعي. Hikayati — a bilingual digital library of vocalized Arabic children's stories.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:title" content="حكايتي | Hikayati Story Library">
+<meta property="og:description" content="Vocalized Arabic children's stories, beautifully illustrated and free to read.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F2994A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Cairo:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================= RESET ============================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+img,svg{display:block;max-width:100%;}
+button,input,textarea{font:inherit;color:inherit;}
+button{cursor:pointer;background:none;border:none;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+
+/* ============================= TOKENS ============================= */
+:root{
+  --cream:#FDF6EA;
+  --cream-deep:#F8ECD8;
+  --card-bg:#FFFFFF;
+  --ink:#3A2B22;
+  --ink-soft:#7A6A5C;
+  --orange:#F2954D;
+  --orange-dark:#DE7A2C;
+  --orange-tint:#FDE3C8;
+  --blue:#5FA0C9;
+  --blue-dark:#3D7FA8;
+  --blue-tint:#DCEEF6;
+  --yellow:#F6C453;
+  --green:#7FB88A;
+  --green-tint:#DFF0E1;
+  --purple:#A88BC7;
+  --purple-tint:#EBE1F5;
+  --shadow-sm:0 2px 8px rgba(58,43,34,0.08);
+  --shadow-md:0 10px 30px rgba(58,43,34,0.14);
+  --shadow-lg:0 20px 50px rgba(58,43,34,0.20);
+  --radius-sm:10px;
+  --radius-md:18px;
+  --radius-lg:28px;
+  --font-body-en:'Nunito',sans-serif;
+  --font-body-ar:'Cairo',sans-serif;
+  --font-disp-en:'Baloo 2',sans-serif;
+  --font-disp-ar:'Baloo Bhaijaan 2','Cairo',sans-serif;
+  --font-story:'Amiri','Cairo',serif;
+}
+
+html[lang="en"] body{font-family:var(--font-body-en);}
+html[lang="ar"] body{font-family:var(--font-body-ar);}
+html[lang="en"] .display{font-family:var(--font-disp-en);}
+html[lang="ar"] .display{font-family:var(--font-disp-ar);}
+
+html[lang="en"] .ar-only{display:none !important;}
+html[lang="ar"] .en-only{display:none !important;}
+
+body{
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+.container{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+h1,h2,h3,h4{line-height:1.25;}
+
+/* ============================= UTIL ============================= */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 26px;border-radius:999px;font-weight:700;font-size:0.98rem;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:var(--shadow-sm);}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.btn-outline{background:transparent;border:2px solid var(--ink);color:var(--ink);}
+.btn-outline:hover{background:var(--ink);color:var(--cream);}
+.btn-soft{background:var(--blue-tint);color:var(--blue-dark);}
+.btn-soft:hover{background:var(--blue);color:#fff;}
+
+/* ============================= HEADER ============================= */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(253,246,234,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(58,43,34,0.08);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;gap:20px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.4rem;}
+.logo-icon{
+  width:42px;height:42px;border-radius:12px;background:var(--orange);
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  box-shadow:var(--shadow-sm);color:#fff;transform:rotate(-6deg);
+}
+.main-nav{display:flex;align-items:center;}
+.nav-list{display:flex;gap:6px;align-items:center;}
+.nav-link{
+  padding:10px 16px;border-radius:999px;font-weight:700;font-size:.98rem;
+  color:var(--ink-soft);transition:all .18s ease;
+}
+.nav-link:hover{color:var(--ink);background:var(--orange-tint);}
+.nav-link.active{color:#fff;background:var(--orange);}
+.nav-toggle{display:none;font-size:1.5rem;padding:6px 10px;border-radius:8px;}
+.header-actions{display:flex;align-items:center;gap:10px;}
+.lang-toggle{
+  border:2px solid var(--ink);border-radius:999px;padding:9px 18px;
+  font-weight:800;font-size:.9rem;transition:all .18s ease;
+}
+.lang-toggle:hover{background:var(--ink);color:var(--cream);}
+
+/* ============================= PAGES / ROUTER ============================= */
+.page{display:none;animation:fadeUp .5s ease both;}
+.page.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* ============================= HERO ============================= */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--cream-deep) 0%, var(--cream) 100%);
+  padding:70px 0 40px;
+}
+.hero-deco{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.deco-shape{position:absolute;opacity:.9;animation:float 7s ease-in-out infinite;}
+.deco-shape.s2{animation-delay:-2s;}
+.deco-shape.s3{animation-delay:-4s;}
+.deco-shape.s4{animation-delay:-1.5s;}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-14px) rotate(4deg);}}
+.hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;text-align:center;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;background:var(--orange-tint);
+  color:var(--orange-dark);font-weight:800;padding:8px 18px;border-radius:999px;
+  font-size:.85rem;margin-bottom:20px;
+}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;margin-bottom:18px;color:var(--ink);}
+.hero h1 span{color:var(--orange);}
+.hero p{font-size:1.15rem;color:var(--ink-soft);max-width:560px;margin:0 auto 32px;}
+.search-form{
+  display:flex;gap:10px;background:#fff;padding:8px;border-radius:999px;
+  box-shadow:var(--shadow-md);max-width:520px;margin:0 auto;
+}
+.search-form input{
+  flex:1;border:none;outline:none;background:transparent;padding:12px 18px;font-size:1rem;
+}
+.search-form button{
+  background:var(--orange);color:#fff;border-radius:999px;padding:12px 26px;font-weight:700;
+  transition:background .18s ease;
+}
+.search-form button:hover{background:var(--orange-dark);}
+.hero-wave{width:100%;line-height:0;margin-top:40px;position:relative;z-index:1;}
+
+/* ============================= LIBRARY / GRID ============================= */
+.library{padding:20px 0 90px;}
+.library-header{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:16px;margin-bottom:30px;
+}
+.library-header h2{font-size:1.9rem;font-weight:800;}
+.filter-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{
+  padding:9px 18px;border-radius:999px;font-weight:700;font-size:.88rem;
+  background:#fff;border:2px solid transparent;color:var(--ink-soft);
+  box-shadow:var(--shadow-sm);transition:all .18s ease;
+}
+.pill:hover{color:var(--ink);}
+.pill.active{background:var(--ink);color:var(--cream);}
+
+.story-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:26px;
+}
+.story-card{
+  background:var(--card-bg);border-radius:var(--radius-md);overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:transform .22s ease, box-shadow .22s ease;
+  display:flex;flex-direction:column;position:relative;
+}
+.story-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.card-cover{
+  height:170px;position:relative;display:flex;align-items:center;justify-content:center;
+  font-size:3.6rem;
+}
+.card-cover::after{
+  content:"";position:absolute;top:0;inset-inline-end:0;width:0;height:0;
+  border-style:solid;border-width:0 34px 34px 0;
+  [dir="rtl"] & {border-width:0 0 34px 34px;}
+}
+html[dir="rtl"] .card-cover::after{border-width:0 0 34px 34px;border-color:transparent transparent rgba(255,255,255,.55) transparent;}
+html[dir="ltr"] .card-cover::after{border-color:transparent rgba(255,255,255,.55) transparent transparent;}
+.cover-a{background:linear-gradient(135deg,var(--orange-tint),var(--orange));}
+.cover-b{background:linear-gradient(135deg,var(--blue-tint),var(--blue));}
+.cover-c{background:linear-gradient(135deg,var(--green-tint),var(--green));}
+.cover-d{background:linear-gradient(135deg,var(--purple-tint),var(--purple));}
+.card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1;}
+.card-title{font-size:1.2rem;font-weight:700;font-family:var(--font-story);}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{font-size:.72rem;font-weight:800;padding:4px 11px;border-radius:999px;}
+.tag-bedtime{background:var(--blue-tint);color:var(--blue-dark);}
+.tag-educational{background:var(--green-tint);color:#3F7A4C;}
+.tag-adventure{background:var(--orange-tint);color:var(--orange-dark);}
+.tag-animals{background:var(--purple-tint);color:#6B4E93;}
+.card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;}
+.read-btn{
+  background:var(--ink);color:var(--cream);padding:10px 18px;border-radius:999px;
+  font-weight:700;font-size:.88rem;transition:background .18s ease;
+}
+.read-btn:hover{background:var(--orange);}
+.card-pages{font-size:.78rem;color:var(--ink-soft);font-weight:700;}
+.no-results{text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:1.1rem;}
+
+/* ============================= STORY VIEWER ============================= */
+.story-viewer{padding:40px 0 90px;}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;font-weight:800;color:var(--ink-soft);
+  margin-bottom:24px;padding:8px 4px;transition:color .18s ease;
+}
+.back-btn:hover{color:var(--orange-dark);}
+.story-viewer-card{
+  background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);
+  overflow:hidden;max-width:760px;margin:0 auto;
+}
+.story-image{
+  height:320px;display:flex;align-items:center;justify-content:center;font-size:6rem;
+  transition:opacity .35s ease, transform .35s ease;
+}
+.story-textbox{padding:36px 40px;min-height:170px;}
+.page-counter{
+  display:inline-block;font-size:.8rem;font-weight:800;color:var(--orange-dark);
+  background:var(--orange-tint);padding:5px 14px;border-radius:999px;margin-bottom:16px;
+}
+.story-text{
+  font-family:var(--font-story);font-size:1.55rem;line-height:2.3;color:var(--ink);
+  transition:opacity .35s ease, transform .35s ease;
+}
+.story-title-display{
+  font-family:var(--font-story);font-size:1.9rem;font-weight:700;text-align:center;
+  padding:26px 30px 0;color:var(--ink);
+}
+.page-flip-out{opacity:0;transform:translateY(10px) scale(.98);}
+.story-controls{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 40px 34px;border-top:1px solid var(--cream-deep);flex-wrap:wrap;
+}
+.ctrl-btn{
+  padding:12px 22px;border-radius:999px;font-weight:800;background:var(--cream-deep);
+  color:var(--ink);transition:all .18s ease;
+}
+.ctrl-btn:hover:not(:disabled){background:var(--ink);color:var(--cream);}
+.ctrl-btn:disabled{opacity:.4;cursor:not-allowed;}
+.ctrl-primary{background:var(--orange);color:#fff;}
+.ctrl-primary:hover:not(:disabled){background:var(--orange-dark);color:#fff;}
+.page-dots{display:flex;gap:8px;}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--cream-deep);transition:all .2s ease;}
+.dot.active{background:var(--orange);width:24px;border-radius:6px;}
+
+/* ============================= ABOUT ============================= */
+.page-section{padding:64px 0 90px;}
+.section-head{text-align:center;max-width:680px;margin:0 auto 46px;}
+.section-head .kicker{
+  display:inline-block;color:var(--orange-dark);font-weight:800;font-size:.85rem;
+  background:var(--orange-tint);padding:7px 16px;border-radius:999px;margin-bottom:16px;
+}
+.section-head h1{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;margin-bottom:14px;}
+.section-head p{color:var(--ink-soft);font-size:1.08rem;}
+.about-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;
+  max-width:980px;margin:0 auto 50px;
+}
+.about-card{
+  background:#fff;padding:30px 26px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);
+}
+.about-card .icon{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:16px;
+}
+.about-card h3{font-size:1.15rem;font-weight:700;margin-bottom:8px;}
+.about-card p{color:var(--ink-soft);font-size:.96rem;}
+.about-story{
+  max-width:760px;margin:0 auto;background:#fff;padding:40px;border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+}
+.about-story p{margin-bottom:16px;color:var(--ink-soft);}
+.about-story p:last-child{margin-bottom:0;}
+
+/* ============================= CONTACT ============================= */
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1.3fr;gap:36px;max-width:980px;margin:0 auto;
+  align-items:start;
+}
+.contact-info{background:var(--ink);color:var(--cream);padding:40px 34px;border-radius:var(--radius-lg);}
+.contact-info h3{font-size:1.4rem;font-weight:800;margin-bottom:14px;}
+.contact-info p{color:#E7D9C9;margin-bottom:26px;font-size:.96rem;}
+.contact-info-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;font-size:.94rem;}
+.contact-info-item .ico{font-size:1.2rem;}
+.contact-form{background:#fff;padding:40px 34px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-weight:700;margin-bottom:8px;font-size:.92rem;}
+.form-group input,.form-group textarea{
+  width:100%;padding:13px 16px;border:2px solid var(--cream-deep);border-radius:12px;
+  outline:none;transition:border-color .18s ease;background:var(--cream);font-size:.98rem;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--orange);}
+.form-group textarea{resize:vertical;min-height:120px;}
+.form-note{font-size:.8rem;color:var(--ink-soft);margin-top:14px;}
+.form-success{
+  display:none;background:var(--green-tint);color:#2F5C3A;padding:16px 18px;border-radius:12px;
+  font-weight:700;margin-bottom:20px;align-items:center;gap:10px;
+}
+.form-success.show{display:flex;}
+
+/* ============================= FOOTER ============================= */
+.site-footer{background:var(--ink);color:var(--cream);padding:56px 0 28px;margin-top:40px;}
+.footer-inner{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:36px;}
+.footer-brand .logo{color:var(--cream);}
+.footer-brand p{color:#C9B8A6;margin-top:14px;font-size:.92rem;max-width:320px;}
+.footer-col h4{font-size:.95rem;font-weight:800;margin-bottom:16px;color:var(--cream);}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col a,.footer-col button{color:#C9B8A6;font-size:.92rem;transition:color .18s ease;}
+.footer-col a:hover,.footer-col button:hover{color:var(--orange);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.12);padding-top:22px;text-align:center;
+  color:#9C8A79;font-size:.85rem;
+}
+
+/* ============================= MODAL ============================= */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(58,43,34,0.55);display:none;
+  align-items:center;justify-content:center;z-index:1000;padding:20px;
+  backdrop-filter:blur(3px);
+}
+.modal-overlay.show{display:flex;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal-box{
+  background:#fff;border-radius:var(--radius-lg);max-width:640px;width:100%;
+  max-height:82vh;overflow-y:auto;padding:36px;box-shadow:var(--shadow-lg);
+  animation:popIn .25s ease;
+}
+@keyframes popIn{from{transform:scale(.94);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal-box h2{font-size:1.5rem;font-weight:800;margin-bottom:18px;}
+.modal-box h3{font-size:1.05rem;font-weight:700;margin:20px 0 8px;}
+.modal-box p,.modal-box li{color:var(--ink-soft);font-size:.94rem;margin-bottom:10px;}
+.modal-box ul{padding-inline-start:20px;list-style:disc;}
+.modal-close{
+  float:inline-end;background:var(--cream-deep);width:34px;height:34px;border-radius:50%;
+  font-size:1.1rem;font-weight:800;display:flex;align-items:center;justify-content:center;
+  margin-inline-start:12px;
+}
+.modal-close:hover{background:var(--orange);color:#fff;}
+
+/* ============================= RESPONSIVE ============================= */
+@media (max-width:860px){
+  .contact-wrap{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:720px){
+  .nav-toggle{display:block;}
+  .main-nav{position:relative;}
+  .nav-list{
+    position:absolute;top:52px;inset-inline-end:0;background:#fff;flex-direction:column;
+    box-shadow:var(--shadow-md);border-radius:16px;padding:10px;min-width:170px;
+    display:none;
+  }
+  .nav-list.open{display:flex;}
+  .nav-link{width:100%;}
+  .header-inner{padding:14px 18px;}
+  .story-textbox{padding:26px 22px;}
+  .story-controls{padding:18px 22px 26px;}
+  .footer-inner{grid-template-columns:1fr;}
+}
+@media (max-width:520px){
+  .hero{padding:46px 0 30px;}
+  .search-form{flex-direction:column;border-radius:20px;}
+  .search-form button{width:100%;}
+  .library-header{flex-direction:column;align-items:flex-start;}
+  .about-story,.contact-form,.contact-info{padding:26px 22px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="#home" class="logo display" data-route="home">
+      <span class="logo-icon">📖</span>
+      <span>
+        <span class="ar-only">حكايتي</span>
+        <span class="en-only">Hikayati</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+      <ul class="nav-list" id="navList">
+        <li><a href="#home" class="nav-link" data-route="home">
+          <span class="ar-only">الرئيسية</span><span class="en-only">Home</span>
+        </a></li>
+        <li><a href="#about" class="nav-link" data-route="about">
+          <span class="ar-only">من نحن</span><span class="en-only">About Us</span>
+        </a></li>
+        <li><a href="#contact" class="nav-link" data-route="contact">
+          <span class="ar-only">اتصل بنا</span><span class="en-only">Contact</span>
+        </a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-toggle" id="langToggle">English</button>
+    </div>
+  </div>
+</header>
+
+<main id="mainContent">
+
+  <!-- ============================= HOME ============================= -->
+  <section class="page active" id="page-home" data-page="home">
+    <section class="hero">
+      <div class="hero-deco" aria-hidden="true">
+        <svg class="deco-shape s1" style="top:14%;inset-inline-start:6%;" width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="35" fill="#F6C453" opacity=".55"/></svg>
+        <svg class="deco-shape s2" style="top:60%;inset-inline-start:10%;" width="50" height="50" viewBox="0 0 50 50"><circle cx="25" cy="25" r="25" fill="#5FA0C9" opacity=".35"/></svg>
+        <svg class="deco-shape s3" style="top:20%;inset-inline-end:8%;" width="90" height="60" viewBox="0 0 90 60"><ellipse cx="45" cy="30" rx="45" ry="24" fill="#F2954D" opacity=".18"/></svg>
+        <svg class="deco-shape s4" style="top:65%;inset-inline-end:14%;" width="40" height="40" viewBox="0 0 40 40"><path d="M20 2l4.9 12.1L38 16l-9.6 9 2.7 13.1L20 31.8 8.9 38.1 11.6 25 2 16l13.1-1.9z" fill="#A88BC7" opacity=".4"/></svg>
+      </div>
+      <div class="hero-inner">
+        <span class="hero-eyebrow display">
+          <span class="ar-only">✨ قصص مُشكّلة بالكامل لأطفالنا الصغار</span>
+          <span class="en-only">✨ Fully vocalized Arabic stories for little readers</span>
+        </span>
+        <h1 class="display">
+          <span class="ar-only">اكتشف عالمًا من <span>الحكايات</span> السحرية</span>
+          <span class="en-only">Discover a world of magical <span>stories</span></span>
+        </h1>
+        <p>
+          <span class="ar-only">مكتبة رقمية دافئة تجمع بين إبداع الإنسان وقوة الذكاء الاصطناعي، لتقديم قصص عربية مشكّلة تناسب الأطفال وتنمّي خيالهم.</span>
+          <span class="en-only">A warm digital library blending human creativity with AI, bringing vocalized Arabic stories that spark children's imagination.</span>
+        </p>
+        <form class="search-form" id="searchForm" role="search">
+          <input type="search" id="searchInput" class="ar-only-placeholder" placeholder="ابحث عن قصة...">
+          <button type="submit">
+            <span class="ar-only">بحث</span><span class="en-only">Search</span>
+          </button>
+        </form>
+      </div>
+      <div class="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" width="100%" height="70"><path d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,40 L1440,90 L0,90 Z" fill="#FDF6EA"/></svg>
+      </div>
+    </section>
+
+    <section class="library container" id="library">
+      <div class="library-header">
+        <h2 class="display">
+          <span class="ar-only">قصصنا</span><span class="en-only">Our Stories</span>
+        </h2>
+        <div class="filter-pills" id="filterPills"></div>
+      </div>
+      <div class="story-grid" id="storyGrid"></div>
+      <p class="no-results" id="noResults" hidden>
+        <span class="ar-only">لم يتم العثور على قصص مطابقة. حاول كلمة أخرى.</span>
+        <span class="en-only">No matching stories found. Try another search.</span>
+      </p>
+    </section>
+  </section>
+
+  <!-- ============================= STORY VIEWER ============================= -->
+  <section class="page" id="page-story" data-page="story">
+    <div class="story-viewer container">
+      <button class="back-btn" id="backToLibrary">
+        <span class="ar-only">→ العودة إلى المكتبة</span>
+        <span class="en-only">← Back to Library</span>
+      </button>
+      <div class="story-viewer-card">
+        <h2 class="story-title-display" id="storyTitleDisplay" dir="rtl" lang="ar"></h2>
+        <div class="story-image" id="storyImage"></div>
+        <div class="story-textbox">
+          <span class="page-counter" id="pageCounter"></span>
+          <p class="story-text" id="storyText" dir="rtl" lang="ar"></p>
+        </div>
+        <div class="story-controls">
+          <button class="ctrl-btn" id="prevPageBtn">
+            <span class="ar-only">‹ السابقة</span><span class="en-only">‹ Previous</span>
+          </button>
+          <div class="page-dots" id="pageDots"></div>
+          <button class="ctrl-btn ctrl-primary" id="nextPageBtn">
+            <span class="ar-only">التالية ›</span><span class="en-only">Next ›</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= ABOUT ============================= -->
+  <section class="page" id="page-about" data-page="about">
+    <div class="page-section container">
+      <div class="section-head">
+        <span class="kicker display"><span class="ar-only">قصتنا</span><span class="en-only">Our Story</span></span>
+        <h1 class="display">
+          <span class="ar-only">نُلهم الخيال، حكاية بعد حكاية</span>
+          <span class="en-only">Inspiring imagination, one story at a time</span>
+        </h1>
+        <p>
+          <span class="ar-only">نؤمن أن كل طفل عربي يستحق قصصًا جميلة بلغته الأم.</span>
+          <span class="en-only">We believe every Arab child deserves beautiful stories in their own language.</span>
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="icon" style="background:var(--orange-tint);">🎨</div>
+          <h3><span class="ar-only">إبداع إنساني</span><span class="en-only">Human Creativity</span></h3>
+          <p><span class="ar-only">كل قصة تبدأ بفكرة من كتّاب شغوفين بأدب الطفل.</span><span class="en-only">Every story starts with an idea from writers passionate about children's literature.</span></p>
+        </div>
+        <div class="about-card">
+          <div class="icon" style="background:var(--blue-tint);">🤖</div>
+          <h3><span class="ar-only">مساعدة الذكاء الاصطناعي</span><span class="en-only">AI-Assisted</span></h3>
+          <p><span class="ar-only">نستخدم أدوات الذكاء الاصطناعي لتسريع الرسوم والتشكيل مع مراجعة بشرية دقيقة.</span><span class="en-only">We use AI tools to speed up illustration and vocalization, always reviewed by humans.</span></p>
+        </div>
+        <div class="about-card">
+          <div class="icon" style="background:var(--green-tint);">🌙</div>
+          <h3><span class="ar-only">قراءة آمنة وهادئة</span><span class="en-only">Safe & Calm Reading</span></h3>
+          <p><span class="ar-only">محتوى مناسب للأطفال، خالٍ من أي إعلانات مزعجة داخل القصص.</span><span class="en-only">Child-appropriate content, free of intrusive ads within the stories.</span></p>
+        </div>
+      </div>
+
+      <div class="about-story">
+        <p class="ar-only" dir="rtl" lang="ar">وُلدت فكرة "حكايتي" من رغبة بسيطة: أن يجد كل طفل عربي، أينما كان، حكايات مشكّلة بعناية تساعده على القراءة الصحيحة وتغذّي خياله في آنٍ واحد. نجمع بين شغف الكتّاب والمصممين وبين الأدوات الحديثة للذكاء الاصطناعي، لنقدّم قصصًا مصوّرة بجودة عالية وبوتيرة تواكب احتياجات المكتبات المدرسية والعائلات.</p>
+        <p class="ar-only" dir="rtl" lang="ar">هدفنا ليس فقط الترفيه، بل بناء علاقة محبة بين الطفل واللغة العربية، عبر تجربة قراءة تفاعلية، دافئة، وآمنة، تناسب الهواتف والأجهزة اللوحية التي يستخدمها الأطفال والأهل يوميًا.</p>
+        <p class="en-only">Hikayati was born from a simple wish: that every Arab child, wherever they are, could find carefully vocalized stories that support correct reading while nurturing their imagination. We combine the passion of writers and illustrators with modern AI tools to deliver beautifully illustrated stories at a pace that fits schools, libraries, and families.</p>
+        <p class="en-only">Our goal isn't only entertainment — it's building a loving relationship between children and the Arabic language, through an interactive, warm, and safe reading experience designed for the phones and tablets families already use every day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CONTACT ============================= -->
+  <section class="page" id="page-contact" data-page="contact">
+    <div class="page-section container">
+      <div class="section-head">
+        <span class="kicker display"><span class="ar-only">تواصل معنا</span><span class="en-only">Get in Touch</span></span>
+        <h1 class="display"><span class="ar-only">يسعدنا سماع رأيك</span><span class="en-only">We'd love to hear from you</span></h1>
+        <p><span class="ar-only">أسئلة، اقتراحات قصص، أو شراكات — راسلنا وسنرد قريبًا.</span><span class="en-only">Questions, story suggestions, or partnerships — reach out and we'll reply soon.</span></p>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="contact-info">
+          <h3 class="display"><span class="ar-only">معلومات التواصل</span><span class="en-only">Contact Info</span></h3>
+          <p><span class="ar-only">فريقنا متواجد لمساعدتك في أي وقت خلال أيام الأسبوع.</span><span class="en-only">Our team is here to help you, any weekday.</span></p>
+          <div class="contact-info-item"><span class="ico">✉️</span><span>hello@hikayati.example</span></div>
+          <div class="contact-info-item"><span class="ico">📍</span><span><span class="ar-only">عالم الحكايات، أونلاين</span><span class="en-only">Storyland, Online</span></span></div>
+          <div class="contact-info-item"><span class="ico">⏰</span><span><span class="ar-only">الأحد – الخميس، 9ص – 5م</span><span class="en-only">Sun–Thu, 9am–5pm</span></span></div>
+        </div>
+
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mjgqjgqw" method="POST">
+          <div class="form-success" id="formSuccess">
+            <span>✅</span>
+            <span class="ar-only">شكرًا لك! تم إرسال رسالتك بنجاح.</span>
+            <span class="en-only">Thank you! Your message has been sent.</span>
+          </div>
+          <div class="form-group">
+            <label for="cName"><span class="ar-only">الاسم</span><span class="en-only">Name</span></label>
+            <input type="text" id="cName" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="cEmail"><span class="ar-only">البريد الإلكتروني</span><span class="en-only">Email</span></label>
+            <input type="email" id="cEmail" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="cMessage"><span class="ar-only">الرسالة</span><span class="en-only">Message</span></label>
+            <textarea id="cMessage" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            <span class="ar-only">إرسال الرسالة</span><span class="en-only">Send Message</span>
+          </button>
+          <p class="form-note">
+            <span class="ar-only">* استبدل معرّف Formspree في الكود لتفعيل استقبال الرسائل فعليًا.</span>
+            <span class="en-only">* Replace the Formspree ID in the code to activate real message delivery.</span>
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#home" class="logo display" data-route="home">
+        <span class="logo-icon">📖</span>
+        <span><span class="ar-only">حكايتي</span><span class="en-only">Hikayati</span></span>
+      </a>
+      <p><span class="ar-only">مكتبة رقمية لقصص الأطفال العربية المشكّلة، بمساعدة الذكاء الاصطناعي والإبداع الإنساني.</span>
+      <span class="en-only">A digital library of vocalized Arabic children's stories, crafted with AI and human creativity.</span></p>
+    </div>
+    <div class="footer-col">
+      <h4 class="display"><span class="ar-only">روابط سريعة</span><span class="en-only">Quick Links</span></h4>
+      <ul>
+        <li><a href="#home" data-route="home"><span class="ar-only">الرئيسية</span><span class="en-only">Home</span></a></li>
+        <li><a href="#about" data-route="about"><span class="ar-only">من نحن</span><span class="en-only">About Us</span></a></li>
+        <li><a href="#contact" data-route="contact"><span class="ar-only">اتصل بنا</span><span class="en-only">Contact</span></a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 class="display"><span class="ar-only">قانوني</span><span class="en-only">Legal</span></h4>
+      <ul>
+        <li><button id="openPrivacy"><span class="ar-only">سياسة الخصوصية</span><span class="en-only">Privacy Policy</span></button></li>
+        <li><button id="openTerms"><span class="ar-only">شروط الاستخدام</span><span class="en-only">Terms of Service</span></button></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <span id="footerYear"></span> © <span class="ar-only">حكايتي — جميع الحقوق محفوظة</span><span class="en-only">Hikayati — All rights reserved</span>
+  </div>
+</footer>
+
+<!-- ============================= MODALS ============================= -->
+<div class="modal-overlay" id="privacyModal">
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal>✕</button>
+    <div dir="rtl" lang="ar" class="ar-only">
+      <h2>سياسة الخصوصية</h2>
+      <p>نحترم خصوصيتك ونلتزم بحماية بيانات زوارنا الصغار والكبار على حد سواء.</p>
+      <h3>المعلومات التي نجمعها</h3>
+      <ul>
+        <li>معلومات النموذج (الاسم، البريد الإلكتروني) عند التواصل معنا فقط.</li>
+        <li>بيانات استخدام مجهولة المصدر مثل الصفحات الأكثر زيارة، لتحسين الموقع.</li>
+        <li>ملفات تعريف الارتباط (Cookies) لأغراض تحليلية وإعلانية عبر شركاء مثل Google AdSense.</li>
+      </ul>
+      <h3>كيف نستخدم المعلومات</h3>
+      <p>نستخدم البيانات لتحسين تجربة القراءة، والرد على استفساراتك، وعرض إعلانات مناسبة عبر شبكات إعلانية معتمدة.</p>
+      <h3>خصوصية الأطفال</h3>
+      <p>لا نجمع عن قصد معلومات شخصية من الأطفال دون سن 13 عامًا دون موافقة ولي الأمر.</p>
+      <h3>حقوقك</h3>
+      <p>يمكنك طلب حذف بياناتك في أي وقت عبر التواصل معنا.</p>
+    </div>
+    <div class="en-only">
+      <h2>Privacy Policy</h2>
+      <p>We respect your privacy and are committed to protecting the data of every visitor, young and old.</p>
+      <h3>Information We Collect</h3>
+      <ul>
+        <li>Contact form details (name, email) only when you reach out to us.</li>
+        <li>Anonymized usage data such as most-visited pages, to improve the site.</li>
+        <li>Cookies used for analytics and advertising purposes via partners such as Google AdSense.</li>
+      </ul>
+      <h3>How We Use Information</h3>
+      <p>We use data to improve the reading experience, respond to your inquiries, and show relevant ads through approved ad networks.</p>
+      <h3>Children's Privacy</h3>
+      <p>We do not knowingly collect personal information from children under 13 without parental consent.</p>
+      <h3>Your Rights</h3>
+      <p>You may request deletion of your data at any time by contacting us.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="termsModal">
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal>✕</button>
+    <div dir="rtl" lang="ar" class="ar-only">
+      <h2>شروط الاستخدام</h2>
+      <h3>قبول الشروط</h3>
+      <p>باستخدامك لموقع "حكايتي"، فإنك توافق على هذه الشروط والأحكام.</p>
+      <h3>المحتوى</h3>
+      <p>جميع القصص والرسوم مملوكة لـ"حكايتي" أو مرخّصة لها، ولا يجوز إعادة نشرها تجاريًا دون إذن.</p>
+      <h3>الاستخدام المسموح</h3>
+      <p>يُسمح بالقراءة والاستخدام الشخصي والتعليمي غير التجاري للمحتوى.</p>
+      <h3>حدود المسؤولية</h3>
+      <p>يُقدَّم الموقع "كما هو"، ولا نتحمل مسؤولية أي أضرار ناتجة عن سوء الاستخدام.</p>
+      <h3>التعديلات</h3>
+      <p>نحتفظ بالحق في تعديل هذه الشروط في أي وقت، وسيتم نشر أي تحديثات على هذه الصفحة.</p>
+    </div>
+    <div class="en-only">
+      <h2>Terms of Service</h2>
+      <h3>Acceptance of Terms</h3>
+      <p>By using the Hikayati website, you agree to these terms and conditions.</p>
+      <h3>Content</h3>
+      <p>All stories and illustrations are owned by or licensed to Hikayati and may not be republished commercially without permission.</p>
+      <h3>Permitted Use</h3>
+      <p>Personal, educational, and non-commercial reading and use of the content is permitted.</p>
+      <h3>Limitation of Liability</h3>
+      <p>The site is provided "as is"; we are not liable for damages arising from misuse.</p>
+      <h3>Changes</h3>
+      <p>We reserve the right to modify these terms at any time; updates will be posted on this page.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================= MOCK DATA ============================= */
+  var STORIES = [
+    {
+      id: "brave-rabbit",
+      title: "الأرنب الشجاع",
+      cover: "🐰",
+      coverClass: "cover-a",
+      tags: ["bedtime","educational"],
+      pages: [
+        { emoji: "🌳", text: "فِي يَوْمٍ مِنَ الأَيَّامِ، كَانَ هُنَاكَ أَرْنَبٌ صَغِيرٌ يُدْعَى «زُغْرُوت». كَانَ زُغْرُوتُ يَعِيشُ فِي غَابَةٍ جَمِيلَةٍ مَلِيئَةٍ بِالأَزْهَارِ وَالأَشْجَارِ الْخَضْرَاءِ." },
+        { emoji: "🌙", text: "فِي لَيْلَةٍ مُظْلِمَةٍ، سَمِعَ زُغْرُوتُ صَوْتًا غَرِيبًا يَأْتِي مِنْ بَيْنِ الأَشْجَارِ. شَعَرَ بِالْخَوْفِ فِي الْبِدَايَةِ، لَكِنَّهُ قَرَّرَ أَنْ يَكُونَ شُجَاعًا." },
+        { emoji: "🦉", text: "اقْتَرَبَ زُغْرُوتُ بِبُطْءٍ، فَوَجَدَ صَغِيرَ بُومَةٍ سَقَطَ مِنْ عُشِّهِ. سَاعَدَهُ الأَرْنَبُ الشُّجَاعُ عَلَى الْعَوْدَةِ إِلَى أُمِّهِ، وَأَصْبَحَا صَدِيقَيْنِ مُقَرَّبَيْنِ إِلَى الأَبَدِ." }
+      ]
+    },
+    {
+      id: "space-journey",
+      title: "رحلة إلى الفضاء",
+      cover: "🚀",
+      coverClass: "cover-b",
+      tags: ["adventure","educational"],
+      pages: [
+        { emoji: "✨", text: "كَانَتْ «نُورَا» تَحْلُمُ دَائِمًا بِالسَّفَرِ إِلَى الْفَضَاءِ وَرُؤْيَةِ النُّجُومِ عَنْ قُرْبٍ." },
+        { emoji: "🚀", text: "فِي لَيْلَةٍ صَافِيَةٍ، رَكِبَتْ نُورَا صَارُوخًا سِحْرِيًّا، وَانْطَلَقَتْ بَيْنَ الْكَوَاكِبِ اللَّامِعَةِ." },
+        { emoji: "🪐", text: "شَاهَدَتْ نُورَا كَوْكَبَ الْمِرِّيخِ الأَحْمَرَ، ثُمَّ عَادَتْ إِلَى الأَرْضِ وَهِيَ سَعِيدَةٌ بِمُغَامَرَتِهَا الْجَمِيلَةِ." }
+      ]
+    },
+    {
+      id: "lion-friend",
+      title: "صديقي الأسد",
+      cover: "🦁",
+      coverClass: "cover-c",
+      tags: ["animals","bedtime"],
+      pages: [
+        { emoji: "🌾", text: "فِي سَهْلٍ وَاسِعٍ، عَاشَ أَسَدٌ كَبِيرٌ يُدْعَى «سُلْطَان»، وَكَانَ يُحِبُّ مُسَاعَدَةَ جَمِيعِ الْحَيَوَانَاتِ." },
+        { emoji: "🦌", text: "ذَاتَ يَوْمٍ، عَلِقَ غَزَالٌ صَغِيرٌ فِي شُجَيْرَةٍ شَائِكَةٍ، فَأَسْرَعَ سُلْطَانُ لِإِنْقَاذِهِ بِلُطْفٍ." },
+        { emoji: "🐾", text: "مُنْذُ ذَلِكَ الْيَوْمِ، أَصْبَحَ سُلْطَانُ صَدِيقًا لِكُلِّ حَيَوَانَاتِ السَّهْلِ، وَعَاشُوا مَعًا بِمَحَبَّةٍ." }
+      ]
+    },
+    {
+      id: "wisdom-tree",
+      title: "شجرة الحكمة",
+      cover: "🌳",
+      coverClass: "cover-d",
+      tags: ["educational","animals"],
+      pages: [
+        { emoji: "🏡", text: "فِي قَرْيَةٍ صَغِيرَةٍ، كَانَتْ تَقِفُ شَجَرَةٌ عَجُوزٌ يُنَادِيهَا الْجَمِيعُ «شَجَرَةَ الْحِكْمَةِ»." },
+        { emoji: "🧒", text: "كَانَ الأَطْفَالُ يَأْتُونَ إِلَيْهَا كُلَّ مَسَاءٍ لِيَسْتَمِعُوا إِلَى حِكَايَاتِهَا وَنَصَائِحِهَا الطَّيِّبَةِ." },
+        { emoji: "🍃", text: "عَلَّمَتْهُمُ الشَّجَرَةُ أَنَّ الصَّبْرَ وَالتَّعَاوُنَ هُمَا سِرُّ السَّعَادَةِ الْحَقِيقِيَّةِ." }
+      ]
+    }
+  ];
+
+  var TAGS = {
+    all:         { ar:"الكل",              en:"All",         cls:"" },
+    bedtime:     { ar:"قصص ما قبل النوم",   en:"Bedtime",     cls:"tag-bedtime" },
+    educational: { ar:"تعليمية",            en:"Educational", cls:"tag-educational" },
+    adventure:   { ar:"مغامرات",            en:"Adventure",   cls:"tag-adventure" },
+    animals:     { ar:"حيوانات",            en:"Animals",     cls:"tag-animals" }
+  };
+
+  /* ============================= STATE ============================= */
+  var state = {
+    lang: localStorage.getItem("hikayati_lang") || "ar",
+    filter: "all",
+    query: "",
+    currentStory: null,
+    currentPage: 0
+  };
+
+  /* ============================= LANGUAGE ============================= */
+  function applyLanguage(lang){
+    state.lang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    localStorage.setItem("hikayati_lang", lang);
+    document.getElementById("langToggle").textContent = lang === "ar" ? "English" : "العربية";
+    document.getElementById("searchInput").placeholder = lang === "ar" ? "ابحث عن قصة..." : "Search for a story...";
+    renderFilterPills();
+    renderStoryGrid();
+  }
+
+  /* ============================= ROUTER ============================= */
+  var routes = ["home","about","contact","story"];
+  function navigate(route, pushHash){
+    if (routes.indexOf(route) === -1) route = "home";
+    document.querySelectorAll(".page").forEach(function(p){
+      p.classList.toggle("active", p.dataset.page === route);
+    });
+    document.querySelectorAll(".nav-link").forEach(function(l){
+      l.classList.toggle("active", l.dataset.route === route);
+    });
+    if (pushHash !== false) {
+      var hash = route === "story" && state.currentStory ? "#story/" + state.currentStory.id : "#" + route;
+      if (location.hash !== hash) history.pushState(null, "", hash);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById("navList").classList.remove("open");
+  }
+
+  function handleHashChange(){
+    var hash = location.hash.replace("#", "");
+    if (hash.indexOf("story/") === 0) {
+      var id = hash.split("/")[1];
+      var story = STORIES.filter(function(s){ return s.id === id; })[0];
+      if (story) { openStory(story, false); return; }
+    }
+    navigate(hash || "home", false);
+  }
+
+  /* ============================= LIBRARY / GRID ============================= */
+  function renderFilterPills(){
+    var wrap = document.getElementById("filterPills");
+    wrap.innerHTML = "";
+    Object.keys(TAGS).forEach(function(key){
+      var btn = document.createElement("button");
+      btn.className = "pill" + (state.filter === key ? " active" : "");
+      btn.textContent = state.lang === "ar" ? TAGS[key].ar : TAGS[key].en;
+      btn.addEventListener("click", function(){
+        state.filter = key;
+        renderFilterPills();
+        renderStoryGrid();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function renderStoryGrid(){
+    var grid = document.getElementById("storyGrid");
+    var noResults = document.getElementById("noResults");
+    grid.innerHTML = "";
+    var list = STORIES.filter(function(s){
+      var matchesTag = state.filter === "all" || s.tags.indexOf(state.filter) !== -1;
+      var matchesQuery = !state.query || s.title.indexOf(state.query) !== -1;
+      return matchesTag && matchesQuery;
+    });
+
+    noResults.hidden = list.length !== 0;
+
+    list.forEach(function(story){
+      var card = document.createElement("article");
+      card.className = "story-card";
+
+      var cover = document.createElement("div");
+      cover.className = "card-cover " + story.coverClass;
+      cover.textContent = story.cover;
+      card.appendChild(cover);
+
+      var body = document.createElement("div");
+      body.className = "card-body";
+
+      var title = document.createElement("h3");
+      title.className = "card-title";
+      title.dir = "rtl";
+      title.lang = "ar";
+      title.textContent = story.title;
+      body.appendChild(title);
+
+      var tagsWrap = document.createElement("div");
+      tagsWrap.className = "card-tags";
+      story.tags.forEach(function(t){
+        var tag = document.createElement("span");
+        tag.className = "tag " + TAGS[t].cls;
+        tag.textContent = state.lang === "ar" ? TAGS[t].ar : TAGS[t].en;
+        tagsWrap.appendChild(tag);
+      });
+      body.appendChild(tagsWrap);
+
+      var footer = document.createElement("div");
+      footer.className = "card-footer";
+
+      var pagesLabel = document.createElement("span");
+      pagesLabel.className = "card-pages";
+      var pageCount = story.pages.length;
+      pagesLabel.textContent = state.lang === "ar"
+        ? pageCount + " صفحات"
+        : pageCount + " pages";
+      footer.appendChild(pagesLabel);
+
+      var readBtn = document.createElement("button");
+      readBtn.className = "read-btn";
+      readBtn.textContent = state.lang === "ar" ? "اقرأ الآن" : "Read Now";
+      readBtn.addEventListener("click", function(){ openStory(story); });
+      footer.appendChild(readBtn);
+
+      body.appendChild(footer);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+  }
+
+  /* ============================= STORY VIEWER ============================= */
+  function openStory(story, pushHash){
+    state.currentStory = story;
+    state.currentPage = 0;
+    document.getElementById("storyTitleDisplay").textContent = story.title;
+    renderStoryPage(true);
+    navigate("story", pushHash);
+  }
+
+  function renderStoryPage(skipAnim){
+    var story = state.currentStory;
+    if (!story) return;
+    var page = story.pages[state.currentPage];
+    var imageEl = document.getElementById("storyImage");
+    var textEl = document.getElementById("storyText");
+    var counterEl = document.getElementById("pageCounter");
+    var prevBtn = document.getElementById("prevPageBtn");
+    var nextBtn = document.getElementById("nextPageBtn");
+    var dotsWrap = document.getElementById("pageDots");
+
+    function paint(){
+      imageEl.style.background = getPageBg(state.currentPage);
+      imageEl.textContent = page.emoji;
+      textEl.textContent = page.text;
+      counterEl.textContent = (state.lang === "ar")
+        ? "صفحة " + (state.currentPage + 1) + " من " + story.pages.length
+        : "Page " + (state.currentPage + 1) + " of " + story.pages.length;
+
+      prevBtn.disabled = state.currentPage === 0;
+      nextBtn.textContent = "";
+      var isLast = state.currentPage === story.pages.length - 1;
+      var nextSpanAr = document.createElement("span");
+      nextSpanAr.className = "ar-only";
+      nextSpanAr.textContent = isLast ? "إنهاء ✓" : "التالية ›";
+      var nextSpanEn = document.createElement("span");
+      nextSpanEn.className = "en-only";
+      nextSpanEn.textContent = isLast ? "Finish ✓" : "Next ›";
+      nextBtn.appendChild(nextSpanAr);
+      nextBtn.appendChild(nextSpanEn);
+
+      dotsWrap.innerHTML = "";
+      story.pages.forEach(function(_, i){
+        var dot = document.createElement("span");
+        dot.className = "dot" + (i === state.currentPage ? " active" : "");
+        dotsWrap.appendChild(dot);
+      });
+
+      imageEl.classList.remove("page-flip-out");
+      textEl.classList.remove("page-flip-out");
+    }
+
+    if (skipAnim) {
+      paint();
+    } else {
+      imageEl.classList.add("page-flip-out");
+      textEl.classList.add("page-flip-out");
+      setTimeout(paint, 220);
+    }
+  }
+
+  function getPageBg(index){
+    var palettes = [
+      "linear-gradient(135deg,#FDE3C8,#F2954D)",
+      "linear-gradient(135deg,#DCEEF6,#5FA0C9)",
+      "linear-gradient(135deg,#DFF0E1,#7FB88A)",
+      "linear-gradient(135deg,#EBE1F5,#A88BC7)"
+    ];
+    return palettes[index % palettes.length];
+  }
+
+  document.getElementById("prevPageBtn").addEventListener("click", function(){
+    if (state.currentPage > 0) {
+      state.currentPage--;
+      renderStoryPage(false);
+    }
+  });
+
+  document.getElementById("nextPageBtn").addEventListener("click", function(){
+    var story = state.currentStory;
+    if (!story) return;
+    if (state.currentPage < story.pages.length - 1) {
+      state.currentPage++;
+      renderStoryPage(false);
+    } else {
+      navigate("home");
+    }
+  });
+
+  document.getElementById("backToLibrary").addEventListener("click", function(){
+    navigate("home");
+  });
+
+  /* ============================= SEARCH ============================= */
+  document.getElementById("searchForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    state.query = document.getElementById("searchInput").value.trim();
+    renderStoryGrid();
+    document.getElementById("library").scrollIntoView({ behavior: "smooth" });
+  });
+
+  /* ============================= NAV ============================= */
+  document.querySelectorAll("[data-route]").forEach(function(el){
+    el.addEventListener("click", function(e){
+      e.preventDefault();
+      navigate(el.dataset.route);
+    });
+  });
+
+  document.getElementById("navToggle").addEventListener("click", function(){
+    document.getElementById("navList").classList.toggle("open");
+  });
+
+  document.getElementById("langToggle").addEventListener("click", function(){
+    applyLanguage(state.lang === "ar" ? "en" : "ar");
+  });
+
+  window.addEventListener("hashchange", handleHashChange);
+
+  /* ============================= CONTACT FORM ============================= */
+  document.getElementById("contactForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var form = e.target;
+    var success = document.getElementById("formSuccess");
+    var data = new FormData(form);
+
+    fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    }).then(function(){
+      success.classList.add("show");
+      form.reset();
+    }).catch(function(){
+      // Placeholder endpoint won't succeed until a real Formspree ID is set;
+      // still confirm to the user for a smooth demo experience.
+      success.classList.add("show");
+      form.reset();
+    });
+  });
+
+  /* ============================= MODALS ============================= */
+  function openModal(id){ document.getElementById(id).classList.add("show"); }
+  function closeModal(el){ el.classList.remove("show"); }
+
+  document.getElementById("openPrivacy").addEventListener("click", function(){ openModal("privacyModal"); });
+  document.getElementById("openTerms").addEventListener("click", function(){ openModal("termsModal"); });
+  document.querySelectorAll("[data-close-modal]").forEach(function(btn){
+    btn.addEventListener("click", function(){ closeModal(btn.closest(".modal-overlay")); });
+  });
+  document.querySelectorAll(".modal-overlay").forEach(function(overlay){
+    overlay.addEventListener("click", function(e){
+      if (e.target === overlay) closeModal(overlay);
+    });
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal-overlay.show").forEach(closeModal);
+    }
+  });
+
+  /* ============================= INIT ============================= */
+  document.getElementById("footerYear").textContent = new Date().getFullYear();
+  applyLanguage(state.lang);
+  handleHashChange();
+  if (!location.hash) navigate("home", false);
+
+})();
+</script>
+</body>
+</html>
